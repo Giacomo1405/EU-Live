@@ -1,0 +1,184 @@
+#Changes 4/19/14
+#Added in missing brackets for the country events
+#Reformatted everything as it seemed out of place
+
+country_event = {
+	id = POP1
+	title = "POP1"
+	desc = "POPD1"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		OR = { 
+			year = 1550
+			year = 1650
+			year = 1750
+		}
+    }
+
+    fire_only_once = no 	#I need to double check whether this goes before or after trigger
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					any_neighbor_province = {
+						owned_by = ROOT
+					}
+					is_overseas = no
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+country_event = {
+	id = POP2
+	title = "POP2"
+	desc = "POPD2"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		OR = { 
+			year = 1600
+			year = 1700
+			year = 1800
+		}
+    }  
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					months_since_last_owner_change = 300
+                    is_core = yes
+					culture = ROOT
+                    NOT = { basetax = 12 }
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+country_event = {
+	id = POP3
+	title = "POP3"
+	desc = "POPD3"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { 
+			year = 1600
+			year = 1750
+		}
+    }
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+                    months_since_last_owner_change = 300
+                    is_core = yes
+                    religion_group = ROOT
+					culture_group = ROOT
+                    NOT = { basetax = 12 }
+                    culture = ROOT 
+				}
+			}		
+		add_basetax = 1	
+		}		     
+	}
+}		
+
+
+country_event = {
+	id = POP4
+	title = "POP4"
+	desc = "POPD4"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { year = 1600
+            year = 1700
+            year = 1800
+		}
+    }
+	
+	fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					months_since_last_owner_change = 300
+					is_core = yes
+					is_capital = yes
+					NOT = { basetax = 16}                                                                   
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+
+country_event = {
+	id = POP5
+	title = "POP5"
+	desc = "POPD5"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { year = 1550
+            year = 1650
+            year = 1750
+		}
+    }
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+                    months_since_last_owner_change = 300
+                    is_core = yes
+                    has_port = yes
+                    NOT = { basetax = 12 }
+                }
+			}
+		add_basetax = 1
+		}
+	}		
+}

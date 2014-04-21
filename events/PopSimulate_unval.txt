@@ -191,7 +191,7 @@ country_event = {
 
 province_event = {
 	id = POP6
-	title = "POP6"
+	title = "POPN6"
 	desc = "POPD6"
 	picture = 
 	
@@ -202,29 +202,30 @@ province_event = {
 			 # Check if neighboring provinces are affected by plague
 			any_neighbor_province = {has_province_flag = poor_infrastructure_plague}
 		}
-	}
-	modifier = {
-		factor = 3.0
-		# Will add this flag to a later event TODO
-		owner = {has_country_flag = insufficient_infrastructure} 								  
-	}
-	modifier = {
-		factor = 2.0
-		owner = {
-			OR = {
+	
+		modifier = {
+			factor = 3.0
+			# Will add this flag to a later event TODO
+			owner = {has_country_flag = insufficient_infrastructure} 								  
+		}
+		modifier = {
+			factor = 2.0
+			owner = {
+				OR = {
 				# If either of these efficiency values are low, increase likelihood
 				production_efficiency = 0.4
 				trade_efficiency = 0.4
+				}
 			}
 		}
-	}
-	modifier = {
+		modifier = {
 			factor = 1.75
 			owner = {adm_tech = 7}
-	}
-	modifier = {
+		}
+		modifier = {
 			factor = 1.75
 			owner = {dip_tech = 10}
+		}
 	}
 	
 	option = {
@@ -244,8 +245,75 @@ province_event = {
 			}
 			add_province_modifier = {severe_plague_local}
 			set_province_flag = poor_infrastructure_plague
+			add_basetax = -1
 		}
 	}
 }
 
+##################################################################
+# Earthquake Event
+# Will be similar to plague event except that nothing can reduce either the impact or likelihood
+# Therefore it will be a MTTH with less likelihood
+##################################################################
+
+country_event = {
+	id = POP7
+	name = "POPN7"
+	desc = "POPD7"
+	picture = 
 	
+	mean_time_to_happen = {
+		months = 5000
+	}
+	
+	option = {
+		name = "POP7OPTA" #We must rebuild
+		add_treasury = -100
+		add_years_of_income = 0.25
+	}
+	
+	option = {
+		name = "POP7OPTB" #It is too expensive
+		add_stability = -1
+		add_years_of_income = -0.50
+	}
+	
+	hidden_effect = {
+		random_owned_province = {
+			add_basetax = -1
+		}
+	}
+}
+	
+###################################################################
+# Severe Earthquake
+###################################################################
+
+country_event = {
+	id = POP8
+	name = "POPN8"
+	desc = "POPD8"
+	picture = 
+	
+	mean_time_to_happen = {
+		months = 10000
+	}
+	
+	option = {
+		name = "POP7OPTA" #We must rebuild
+		add_treasury = -150
+		add_years_of_income = 0.50
+	}
+	
+	option = {
+		name = "POP7OPTB" #It is too expensive
+		add_stability = -1
+		add_years_of_income = -1.0
+	}
+	
+	hidden_effect = {
+		random_owned_province = {
+			add_basetax = -2
+		}
+	}
+}

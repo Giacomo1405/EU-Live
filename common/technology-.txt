@@ -13,28 +13,28 @@ groups = {
 		cav_to_inf_ratio = 0.5
 	}
 	eastern = {
-		modifier = 0.18
+		modifier = 0.2
 		start_level = 3
 		cav_to_inf_ratio = 0.6
 	}
 	ottoman = {
-		modifier = 0.22
+		modifier = 0.28
 		start_level = 5
 		cav_to_inf_ratio = 0.5
 	}
 	muslim = {
-		modifier = 0.3
+		modifier = 0.35
 		start_level = 4
 		cav_to_inf_ratio = 0.8
 	}
 	indian = {
-		modifier = 0.4
+		modifier = 0.45
 		start_level = 4
 		cav_to_inf_ratio = 0.5
 
 	}
 	chinese = {
-		modifier = 0.4
+		modifier = 0.45
 		start_level = 4
 		cav_to_inf_ratio = 0.5
 

@@ -1,0 +1,321 @@
+country_event = {
+	id = POP1
+	title = "POP1"
+	desc = "POPD1"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		OR = { 
+			year = 1550
+			year = 1650
+			year = 1750
+		}
+    }
+
+    fire_only_once = no 	
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					any_neighbor_province = {
+						owned_by = ROOT
+					}
+					is_overseas = no
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+country_event = {
+	id = POP2
+	title = "POP2"
+	desc = "POPD2"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+		OR = { 
+			year = 1600
+			year = 1700
+			year = 1800
+		}
+    }  
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					months_since_last_owner_change = 300
+                    is_core = yes
+					culture = ROOT
+                    NOT = {basetax = 12}
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+country_event = {
+	id = POP3
+	title = "POP3"
+	desc = "POPD3"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { 
+			year = 1600
+			year = 1750
+		}
+    }
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+                    months_since_last_owner_change = 300
+                    is_core = yes
+                    religion_group = ROOT
+					culture_group = ROOT
+                    NOT = {basetax = 12}
+                    culture = ROOT 
+				}
+			}		
+		add_basetax = 1	
+		}		     
+	}
+}		
+
+
+country_event = {
+	id = POP4
+	title = "POP4"
+	desc = "POPD4"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { 
+			year = 1600
+            year = 1700
+            year = 1800
+		}
+    }
+	
+	fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					months_since_last_owner_change = 300
+					is_core = yes
+					is_capital = yes
+					NOT = {basetax = 16}                                                                   
+				}
+			}
+        add_basetax = 1
+		}
+	}		
+}
+
+
+country_event = {
+	id = POP5
+	title = "POP5"
+	desc = "POPD5"
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	trigger = {
+        OR = { 
+			year = 1550
+            year = 1650
+            year = 1750
+		}
+    }
+	
+    fire_only_once = no
+
+	option = {
+		name = "POPN1"
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+                    months_since_last_owner_change = 300
+                    is_core = yes
+                    has_port = yes
+                    NOT = {basetax = 12}
+                }
+			}
+		add_basetax = 1
+		}
+	}		
+}
+
+########################################################################
+# Insufficient Infrastructure (Plague Event)
+# Note that on top of the vanilla plague event this should increase chance of plague
+# meaning these numbers will most likely have to be played with
+# TODO For event, Figure out how much infrastructure, trade efficiency, and production efficiency should decrease 
+# effect. Also need to program infrastructure into the game
+########################################################################
+
+province_event = {
+	id = POP6
+	title = "POPN6"
+	desc = "POPD6"
+	picture = REFORM_eventPicture #placeholder
+	
+	mean_time_to_happen = {
+		months = 1000
+		modifier = {
+			factor = 0.75
+			 # Check if neighboring provinces are affected by plague
+			any_neighbor_province = {has_province_flag = poor_infrastructure_plague}
+		}
+
+		modifier = {
+			factor = 3.0
+			# Will add this flag to a later event TODO
+			owner = {has_country_flag = insufficient_infrastructure} 								  
+		}
+
+		modifier = {
+			factor = 2.0
+			owner = {
+				OR = {
+				# If either of these efficiency values are low, increase likelihood
+				production_efficiency = 0.4
+				trade_efficiency = 0.4
+				}
+			}
+		}
+
+		modifier = {
+			factor = 1.75
+			owner = {adm_tech = 7}
+		}
+
+		modifier = {
+			factor = 1.75
+			owner = {dip_tech = 10}
+		}
+	}	
+	
+	option = {
+		name = "POP6N6" 										 
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_province = {
+				limit = {
+					AND = {	
+						# Will add effect if country has insufficient infrastructure, and province spread to has basetax higher than 11	
+						owner = {has_country_flag = insufficient_infrastructure}
+						NOT = {basetax = 11}
+					}	
+				}
+			}
+			add_province_modifier = {severe_plague_local}
+			add_basetax = -1
+		}
+	}
+}
+
+##################################################################
+# Earthquake Event
+# Will be similar to plague event except that nothing can reduce either the impact or likelihood
+# Therefore it will be a MTTH with less likelihood
+##################################################################
+
+country_event = {
+	id = POP7
+	name = "POPN7"
+	desc = "POPD7"
+	picture = REFORM_eventPicture #placeholder
+	
+	mean_time_to_happen = {
+		months = 5000
+	}
+	
+	option = {
+		name = "POP7OPTA" #We must rebuild
+		add_treasury = -100
+		add_years_of_income = 0.25
+	}
+	
+	option = {
+		name = "POP7OPTB" #It is too expensive
+		add_stability = -1
+		add_years_of_income = -0.50
+	}
+	
+	hidden_effect = {
+		random_owned_province = {
+			add_basetax = -1
+		}
+	}
+}
+	
+###################################################################
+# Severe Earthquake
+###################################################################
+
+country_event = {
+	id = POP8
+	name = "POPN8"
+	desc = "POPD8"
+	picture = REFORM_eventPicture #placeholder
+	
+	mean_time_to_happen = {
+		months = 10000
+	}
+	
+	option = {
+		name = "POP7OPTA" #We must rebuild
+		add_treasury = -150
+		add_years_of_income = 0.50
+	}
+	
+	option = {
+		name = "POP7OPTB" #It is too expensive
+		add_stability = -1
+		add_years_of_income = -1.0
+	}
+	
+	hidden_effect = {
+		random_owned_province = {
+			add_basetax = -2
+		}
+	}
+}

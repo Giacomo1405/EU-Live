@@ -1,0 +1,18 @@
+Brittany File
+	- Missing closing Bracket
+		- Fixed
+Rebels
+	- Missing Closing Bracket
+		- Fixed
+
+new_triggered_modifiers
+	- Missing Closing Bracket
+		- Fixed
+
+dip
+	- Misspelled naval_morale
+		- Fixed
+	- Misspelled naval_maintenance
+		- Fixed
+
+Couple more bug fixes. No more CTDs experienced		
